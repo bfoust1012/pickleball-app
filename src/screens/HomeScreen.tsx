@@ -48,6 +48,7 @@ export default function HomeScreen({ navigation }: Props) {
           <ActionRow label="Resume Current Session" />
           <ActionRow label="Create New Session" />
           <ActionRow label="Manage Players" onPress={() => navigation.navigate("PlayerSetup")} />
+          <ActionRow label="Court Setup" onPress={() => navigation.navigate("CourtSetup")} />
           <ActionRow label="Create Sign-Up Link" />
           <ActionRow label="Saved Groups" />
           <ActionRow label="Recent Sessions" />

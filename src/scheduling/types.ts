@@ -1,4 +1,4 @@
-// Core data models shared across all scheduling engines.
+﻿// Core data models shared across all scheduling engines.
 // Kept as plain TypeScript with zero React/React Native imports so this file
 // (and everything in src/scheduling/) is independently testable and portable.
 
@@ -12,6 +12,13 @@ export type Player = {
   color?: string;
   arrivalRound: number; // round number this player becomes available (1 = from the start)
   departureRound?: number; // last round this player is available for (inclusive)
+};
+
+export type Court = {
+  number: number;
+  name: string; // editable, e.g. "King's Court", "Court 2"
+  available: boolean;
+  color?: string;
 };
 
 export type GameScore = {
@@ -57,6 +64,7 @@ export type PlayerStats = {
 };
 
 export type StatsByPlayer = Record<string, PlayerStats>;
+
 export type SessionFormat =
   | "open_play"
   | "round_robin_rotating"
@@ -68,7 +76,7 @@ export type SessionSettings = {
   numCourts: number;
   totalRounds: number;
   format: SessionFormat;
-  courtNames: string[];
+  courts: Court[];
   requireApproval: boolean;
   maxPlayers: number | null;
 };

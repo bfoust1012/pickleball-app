@@ -1,10 +1,8 @@
 ﻿import {
-  collection,
   doc,
   getDoc,
   setDoc,
   updateDoc,
-  serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { getDeviceId } from "../lib/deviceId";
@@ -25,7 +23,10 @@ const DEFAULT_SETTINGS: SessionSettings = {
   numCourts: 2,
   totalRounds: 9,
   format: "king_of_court",
-  courtNames: ["Court 1", "Court 2"],
+  courts: [
+    { number: 1, name: "Court 1", available: true },
+    { number: 2, name: "Court 2", available: true },
+  ],
   requireApproval: false,
   maxPlayers: null,
 };
