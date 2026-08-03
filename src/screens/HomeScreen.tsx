@@ -5,9 +5,20 @@ import type { RootStackParamList } from "../navigation/RootNavigator";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
-function FormatButton({ label, sublabel, color }: { label: string; sublabel: string; color: string }) {
+function FormatButton({
+  label,
+  sublabel,
+  color,
+  onPress,
+}: {
+  label: string;
+  sublabel: string;
+  color: string;
+  onPress?: () => void;
+}) {
   return (
     <Pressable
+      onPress={onPress}
       className="flex-1 min-w-[45%] rounded-lg p-4 mb-3"
       style={{ backgroundColor: color }}
     >
@@ -30,6 +41,8 @@ function ActionRow({ label, onPress }: { label: string; onPress?: () => void }) 
 }
 
 export default function HomeScreen({ navigation }: Props) {
+  const goToSchedule = () => navigation.navigate("Schedule");
+
   return (
     <SafeAreaView className="flex-1 bg-warm-white">
       <ScrollView className="px-4 pt-4" contentContainerStyle={{ paddingBottom: 32 }}>
@@ -38,8 +51,8 @@ export default function HomeScreen({ navigation }: Props) {
 
         <View className="flex-row flex-wrap justify-between gap-x-3">
           <FormatButton label="Open Play" sublabel="Rotate as games finish" color="#1D5FA8" />
-          <FormatButton label="Round Robin" sublabel="Planned schedule" color="#2E7D4F" />
-          <FormatButton label="King of the Court" sublabel="Winners move up" color="#1D5FA8" />
+          <FormatButton label="Round Robin" sublabel="Planned schedule" color="#2E7D4F" onPress={goToSchedule} />
+          <FormatButton label="King of the Court" sublabel="Winners move up" color="#1D5FA8" onPress={goToSchedule} />
           <FormatButton label="Ladder League" sublabel="Multi-session ranking" color="#2E7D4F" />
         </View>
 
@@ -49,6 +62,8 @@ export default function HomeScreen({ navigation }: Props) {
           <ActionRow label="Create New Session" />
           <ActionRow label="Manage Players" onPress={() => navigation.navigate("PlayerSetup")} />
           <ActionRow label="Court Setup" onPress={() => navigation.navigate("CourtSetup")} />
+          <ActionRow label="View Schedule" onPress={goToSchedule} />
+          <ActionRow label="Player History" onPress={() => navigation.navigate("History")} />
           <ActionRow label="Create Sign-Up Link" />
           <ActionRow label="Saved Groups" />
           <ActionRow label="Recent Sessions" />
