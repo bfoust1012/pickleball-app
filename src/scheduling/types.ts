@@ -57,3 +57,42 @@ export type PlayerStats = {
 };
 
 export type StatsByPlayer = Record<string, PlayerStats>;
+export type SessionFormat =
+  | "open_play"
+  | "round_robin_rotating"
+  | "round_robin_fixed"
+  | "king_of_court"
+  | "ladder";
+
+export type SessionSettings = {
+  numCourts: number;
+  totalRounds: number;
+  format: SessionFormat;
+  courtNames: string[];
+  requireApproval: boolean;
+  maxPlayers: number | null;
+};
+
+export type SignupStatus = "pending" | "waitlisted";
+
+export type SignupEntry = {
+  id: string;
+  name: string;
+  nickname?: string;
+  attending: "yes" | "maybe" | "no";
+  note?: string;
+  submittedAt: number;
+  status: SignupStatus;
+};
+
+export type Session = {
+  id: string;
+  name: string;
+  players: Player[];
+  settings: SessionSettings;
+  rounds: Round[];
+  signups: SignupEntry[];
+  createdAt: number;
+  updatedAt: number;
+  createdByDeviceId: string;
+};
